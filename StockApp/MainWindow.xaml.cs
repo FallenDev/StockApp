@@ -12,16 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
+using Microsoft.AppCenter.Analytics;
+using Phantom_Trades.Services;
 
 namespace StockApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
+            FrameworkService.DotNetVersionCheck();
+
             InitializeComponent();
         }
     }
