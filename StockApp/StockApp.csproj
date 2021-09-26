@@ -7,4 +7,12 @@
 		<ApplicationIcon />
 		<StartupObject />
 	</PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="MahApps.Metro" Version="2.4.7" />
+	  <PackageReference Include="Microsoft.AppCenter" Version="4.4.0" />
+	  <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.4.0" />
+	  <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.4.0" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	  <PackageReference Include="RestSharp" Version="106.12.0" />
+	</ItemGroup>
 </Project>
