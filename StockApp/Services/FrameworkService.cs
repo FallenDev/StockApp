@@ -3,8 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 
-
-namespace Phantom_Trades.Services
+namespace StockApp.Services
 {
     public class FrameworkService
     {

@@ -6,8 +6,65 @@
         xmlns:local="clr-namespace:StockApp"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Height="450" Width="800" Icon="Images/Title.png"
+        GlowBrush="#CC008A00" Background="{DynamicResource MahApps.Brushes.Window.Background}"
+        WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" 
+        ShowSystemMenuOnRightClick="False" WindowStyle="ThreeDBorderWindow" Opacity="0.95" SnapsToDevicePixels="True" IconBitmapScalingMode="HighQuality">
     <Grid>
-
+        <Grid Name="MainGrid" HorizontalAlignment="Left" Height="414" VerticalAlignment="Center" Width="780" Grid.ColumnSpan="2" Margin="10,0,0,0">
+            <!--<Button Content="Execute!" Name="ExecuteBtn" Margin="682,377,10,0" VerticalAlignment="Top" Click="ExecuteRedirectBtn" Foreground="#FFFF0707"/>-->
+            <TabControl Margin="10,0,10,42">
+                <TabItem Header="Home">
+                    <Grid Background="#FFE5E5E5">
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Stock Screener" Margin="1,0,-2,0" BorderBrush="#FF008A00">
+                    <Grid Background="Black">
+                        <ComboBox x:Name="MoversGrp" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" d:DataContext="{d:DesignData}" DropDownClosed="Movers_DropDownClosed">
+                            <ComboBoxItem Content="DOW30"/>
+                            <ComboBoxItem Content="NASDAQ100"/>
+                            <ComboBoxItem Content="SP500"/>
+                        </ComboBox>
+                        <ListView Margin="10,41,10,10" x:Name="MoversList" ItemsSource="{Binding Movers}" Opacity="0.5" SelectionChanged="MoversRefresh_OnClick">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Symbol" DisplayMemberBinding="{Binding MoversSym}" />
+                                    <GridViewColumn Header="Last $" DisplayMemberBinding="{Binding LastPrice}" />
+                                    <GridViewColumn Header="Change %" DisplayMemberBinding="{Binding ChangePct}" />
+                                    <GridViewColumn Header="Change AH" DisplayMemberBinding="{Binding ChangeAfter}" />
+                                    <GridViewColumn Header="Change PM" DisplayMemberBinding="{Binding ChangePre}" />
+                                    <GridViewColumn Header="Close $" DisplayMemberBinding="{Binding PrevClosePrice}" />
+                                    <GridViewColumn Header="Volume" DisplayMemberBinding="{Binding Volume}" />
+                                    <GridViewColumn Header="10-Day Vol %" DisplayMemberBinding="{Binding PctTenDayVol}" />
+                                </GridView>
+                            </ListView.View>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="BorderBrush" Value="WhiteSmoke" />
+                                    <Setter Property="Background" Value="Black"/>
+                                    <Setter Property="Foreground" Value="#FF09F32F" />
+                                    <Setter Property="FontWeight" Value="Heavy" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.Resources>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Black"/>
+                                    <Setter Property="Foreground" Value="#FF09F32F"/>
+                                    <Setter Property="FontWeight" Value="Heavy" />
+                                </Style>
+                            </ListView.Resources>
+                        </ListView>
+                        <mah:ToggleSwitch Margin="150,7,0,0" VerticalAlignment="Top" OffContent="Bottom" OnContent="Top" Toggled="Movers_OnToggled" Foreground="#FF09F32F" FontWeight="Bold" FontSize="15" IsOn="True" Width="110" />
+                        <Button Content="Refresh" HorizontalAlignment="Left" Margin="270,9,0,0" VerticalAlignment="Top" Foreground="#FF09F32F" Click="MoversRefresh_OnClick" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Calculator" Margin="3,0,-8,0">
+                    <Grid Background="#FFE5E5E5">
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
     </Grid>
 </mah:MetroWindow>
