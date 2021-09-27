@@ -27,6 +27,7 @@ namespace StockApp
     public partial class MainWindow
     {
         private string _symbol;
+        public static bool TopOrBottom;
 
         internal static ObservableCollection<MoversModel> Movers { get; set; }
         public static string MoversSymbol { get; set; }
@@ -37,7 +38,6 @@ namespace StockApp
         public static double? PrevClosePrice { get; set; }
         public static int? MoversVolume { get; set; }
         public static double? PctTenDayVol { get; set; }
-        public static bool TopOrBottom { get; set; }
         public static string GroupName { get; set; }
 
         public MainWindow()
@@ -79,11 +79,16 @@ namespace StockApp
 
             if (string.IsNullOrEmpty(controller.Exchange)) return;
             await controller.GetMoversAsync();
+            MoversList.ItemsSource = Movers;
+
         }
 
         private async void Movers_OnToggled(object sender, RoutedEventArgs e)
         {
-            var controller = new CnbcController();
+            var controller = new CnbcController
+            {
+                Exchange = MoversGrp.SelectionBoxItem.ToString()
+            };
             ClearLists();
 
             if (string.IsNullOrEmpty(controller.Exchange)) return;
@@ -91,15 +96,22 @@ namespace StockApp
 
             TopOrBottom = toggleSwitch.IsOn;
             await controller.GetMoversAsync();
+            MoversList.ItemsSource = Movers;
+
         }
 
         private async void MoversRefresh_OnClick(object sender, RoutedEventArgs e)
         {
-            var controller = new CnbcController();
+            var controller = new CnbcController
+            {
+                Exchange = MoversGrp.SelectionBoxItem.ToString()
+            };
             ClearLists();
 
             if (string.IsNullOrEmpty(controller.Exchange)) return;
             await controller.GetMoversAsync();
+            MoversList.ItemsSource = Movers;
+
         }
 
         #endregion
