@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StockApp"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="StockApp"
         mc:Ignorable="d"
         Height="450" Width="800" Icon="Images/Title.png"
         GlowBrush="#CC008A00" Background="{DynamicResource MahApps.Brushes.Window.Background}"
@@ -56,7 +57,7 @@
                                 </Style>
                             </ListView.Resources>
                         </ListView>
-                        <mah:ToggleSwitch Margin="150,7,0,0" VerticalAlignment="Top" OffContent="Bottom" OnContent="Top" Toggled="Movers_OnToggled" Foreground="#FF09F32F" FontWeight="Bold" FontSize="15" IsOn="True" Width="110" />
+                        <mah:ToggleSwitch Name="OnToggle" Margin="150,7,0,0" VerticalAlignment="Top" OffContent="Bottom" OnContent="Top" Toggled="Movers_OnToggled" Foreground="#FF09F32F" FontWeight="Bold" FontSize="15" IsOn="True" Width="110" />
                         <Button Content="Refresh" HorizontalAlignment="Left" Margin="270,9,0,0" VerticalAlignment="Top" Foreground="#FF09F32F" Click="MoversRefresh_OnClick" />
                     </Grid>
                 </TabItem>
