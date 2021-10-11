@@ -13,7 +13,7 @@
         ShowSystemMenuOnRightClick="False" WindowStyle="ThreeDBorderWindow" Opacity="0.95" SnapsToDevicePixels="True" IconBitmapScalingMode="HighQuality">
     <Grid>
         <Grid Name="MainGrid" HorizontalAlignment="Left" Height="414" VerticalAlignment="Center" Width="780" Grid.ColumnSpan="2" Margin="10,0,0,0">
-            <!--<Button Content="Execute!" Name="ExecuteBtn" Margin="682,377,10,0" VerticalAlignment="Top" Click="ExecuteRedirectBtn" Foreground="#FFFF0707"/>-->
+            <Button Content="Go!" Name="Go" Margin="682,377,10,0" VerticalAlignment="Top" Foreground="#FFFF0707"/>
             <TabControl Margin="10,0,10,42">
                 <TabItem Header="Home">
                     <Grid Background="#FFE5E5E5">
@@ -66,6 +66,8 @@
                     </Grid>
                 </TabItem>
             </TabControl>
+            <TextBox Name="Ticker" CharacterCasing="Upper" HorizontalAlignment="Left" Margin="15,376,0,0" Text="" ToolTip="Ticker" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" MaxLength="5" AutomationProperties.IsRequiredForForm="True" Foreground="#FF09F32F" FontSize="14" FontWeight="Bold" MaxLines="1"/>
+            <Label Content="Ticker" HorizontalAlignment="Left" Margin="95,377,0,0" VerticalAlignment="Top" Foreground="#FF09F32F" FontWeight="Bold"/>
         </Grid>
     </Grid>
 </mah:MetroWindow>
