@@ -9,6 +9,7 @@
 		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Images\PSU_IST_RGB_REV_2C.png" />
 	  <None Remove="Images\Title.png" />
 	</ItemGroup>
 	<ItemGroup>
@@ -20,6 +21,7 @@
 	  <PackageReference Include="RestSharp" Version="106.12.0" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Resource Include="Images\PSU_IST_RGB_REV_2C.png" />
 	  <Resource Include="Images\Title.png" />
 	</ItemGroup>
 </Project>
