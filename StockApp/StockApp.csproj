@@ -24,4 +24,9 @@
 	  <Resource Include="Images\PSU_IST_RGB_REV_2C.png" />
 	  <Resource Include="Images\Title.png" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Update="Content\TDAuth.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 </Project>

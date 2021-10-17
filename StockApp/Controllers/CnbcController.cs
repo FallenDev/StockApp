@@ -11,13 +11,17 @@ namespace StockApp.Controllers
     public class CnbcController: ICnbcController
     {
         #region Auth Variables
+
         private const string BaseAdd = "https://gdsapi.cnbc.com/market-mover/groupMover/";
         private const string TrailAdd = "/CHANGE_PCT/BOTH/12.json?source=SAVED&delayed=false&partnerId=2";
         public string Exchange = "";
+
         #endregion
 
         #region Quote Variables
+
         private string _jsonData;
+
         #endregion
 
         public async Task<object> GetMoversAsync()
