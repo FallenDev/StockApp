@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using RestSharp;
 using StockApp.Interfaces;
 using StockApp.Models;
+using StockApp.Services;
 
 namespace StockApp.Controllers
 {
@@ -76,12 +76,40 @@ namespace StockApp.Controllers
 
         public object DeserializeQuote(string jsonData, string sym)
         {
-            throw new NotImplementedException();
+            var dict = DeserializeQuotesToJson(jsonData);
+            _symbol = dict[sym].Symbol;
+            _netChange = dict[sym].NetChange;
+            _lastPrice = dict[sym].LastPrice;
+            _bidPrice = dict[sym].BidPrice;
+            _askPrice = dict[sym].AskPrice;
+            _margin = dict[sym].Marginable;
+            _short = dict[sym].Shortable;
+            _volatility = dict[sym].Volatility;
+            _peRatio = dict[sym].PeRatio;
+            _secStatus = dict[sym].SecurityStatus;
+            _divDate = dict[sym].DivDate;
+            _volume = dict[sym].TotalVolume;
+            _openPrice = dict[sym].OpenPrice;
+            _highPrice = dict[sym].HighPrice;
+            _lowPrice = dict[sym].LowPrice;
+            _closePrice = dict[sym].ClosePrice;
+            _exchangeName = dict[sym].ExchangeName;
+            _delayed = dict[sym].Delayed;
+            return dict;
         }
 
         public Dictionary<string, TDQuoteModel> DeserializeQuotesToJson(string jsonData)
         {
-            throw new NotImplementedException();
+            _quoteDictionary = JsonSerializer.Deserialize<Dictionary<string, TDQuoteModel>>(jsonData, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                Converters =
+                {
+                    new NullableDateTimeOffsetService()
+                }
+            });
+
+            return _quoteDictionary;
         }
 
         public void TDQuoteAssign()

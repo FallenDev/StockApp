@@ -22,7 +22,7 @@
                                 <SolidColorBrush Color="#FFD4CDCD" Opacity="0.8"/>
                             </Image.OpacityMask>
                         </Image>
-                        <ListView Margin="0,147,338,48" x:Name="TdStockListView" ItemsSource="{Binding TDStocks}" Opacity="0.5" HorizontalAlignment="Right" Width="78">
+                        <ListView Margin="0,145,308,49" x:Name="TdStockListView" ItemsSource="{Binding TDStocks}" Opacity="0.5" HorizontalAlignment="Right" Width="108">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>

@@ -18,9 +18,9 @@ namespace StockApp.Services
 
         private static bool DotNetPrompt()
         {
-            var url = "https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-6.0.100-preview.7-windows-x64-installer";
+            var url = "https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-6.0.100-rc.2-windows-x64-installer";
             if (MessageBox.Show(
-                "We have detected that you do not meet the minimum framework requirement. Do you want to download the required framework? (.NET 6.0 Preview-7)",
+                "We have detected that you do not meet the minimum framework requirement. Do you want to download the required framework? (.NET 6.0.100-rc.2)",
                 "StockApp", MessageBoxButton.YesNo, MessageBoxImage.Hand) != MessageBoxResult.Yes) return false;
             try
             {
