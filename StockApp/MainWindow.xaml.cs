@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,8 +14,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 using MahApps.Metro.Controls;
+
 using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using StockApp.Controllers;
 using StockApp.Models;
 using StockApp.Services;
@@ -29,7 +33,9 @@ namespace StockApp
         private string _symbol;
         public static bool TopOrBottom;
 
-        internal static ObservableCollection<MoversModel> Movers { get; set; }
+        public static ObservableCollection<TDQuoteModel> TdStocks { get; set; }
+        public static ObservableCollection<TDQuoteModel> TdDetails { get; set; }
+        public static ObservableCollection<MoversModel> Movers { get; set; }
         public static string MoversSymbol { get; set; }
         public static double? MoversLastPrice { get; set; }
         public static double? ChangePct { get; set; }
@@ -52,21 +58,72 @@ namespace StockApp
         {
             ClearLists();
 
-            if (Movers != null) return;
+            if (TdStocks != null) return;
+            TdStocks = new ObservableCollection<TDQuoteModel>();
+            TdDetails = new ObservableCollection<TDQuoteModel>();
             Movers = new ObservableCollection<MoversModel>();
+
+            TdStockListView.ItemsSource = TdStocks;
+            TdStockListViewDetails.ItemsSource = TdDetails;
             MoversList.ItemsSource = Movers;
         }
 
         private static void ClearLists()
         {
+            TdStocks?.Clear();
+            TdDetails?.Clear();
             Movers?.Clear();
         }
+
+        #region HomePage
+
+        private void GoButton(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Ticker.Text)) return;
+
+            ManageInputForTicker();
+            DataPull();
+            DataContext = this;
+        }
+
+        private void ManageInputForTicker()
+        {
+            var temp = Ticker.Text;
+            var ex = new Regex(@"[^a-zA-Z]");
+            temp = ex.Replace(temp, "");
+            temp = temp.Trim();
+            Ticker.Text = temp;
+            _symbol = temp;
+        }
+
+        private async void DataPull()
+        {
+            var controller = new TDController();
+
+            ListSetup();
+            ClearLists();
+
+            try
+            {
+                controller.Initiate();
+                await controller.GetQuoteAsync(_symbol).ConfigureAwait(true);
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                return;
+            }
+
+            controller.TDQuoteAssign();
+        }
+
+        #endregion
 
         #region MoversPage
 
         private void Movers_OpenModal(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
 
         private async void Movers_DropDownClosed(object sender, EventArgs e)

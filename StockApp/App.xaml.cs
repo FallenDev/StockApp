@@ -10,6 +10,7 @@ using System.Windows;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using StockApp.Controllers;
 
 namespace StockApp
 {
@@ -21,6 +22,7 @@ namespace StockApp
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            GrabVault();
             SetCountryCode();
             AppCenter.Start("172a86f0-8927-43e4-887a-a11fb4c2ccea",
                 typeof(Analytics), typeof(Crashes));
@@ -31,6 +33,12 @@ namespace StockApp
         {
             var countryCode = RegionInfo.CurrentRegion.TwoLetterISORegionName;
             AppCenter.SetCountryCode(countryCode);
+        }
+
+        private static void GrabVault()
+        {
+            var connection = new TDController();
+            connection.Initiate();
         }
     }
 }

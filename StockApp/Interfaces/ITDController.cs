@@ -7,7 +7,7 @@ namespace StockApp.Interfaces
     public interface ITDController
     {
         void Initiate();
-        Task GetQuoteAsync(string sym);
+        Task<object> GetQuoteAsync(string sym);
         Task TDResponseAsync();
         object DeserializeQuote(string jsonData, string sym);
         Dictionary<string, TDQuoteModel> DeserializeQuotesToJson(string jsonData);
