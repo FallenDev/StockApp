@@ -28,7 +28,8 @@ namespace StockAppTest
         private Stopwatch _stop;
         private Application _app;
         private ConditionFactory _cF;
-        private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(1);
+        private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(5);
+        private static readonly TimeSpan QuickTimeout = TimeSpan.FromSeconds(3);
 
         [SetUp]
         public void Setup()
@@ -134,6 +135,69 @@ namespace StockAppTest
 
             var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("MoversList")).AsListBox().Items;
             Assert.That(stockData, Is.Not.Null);
+        }
+
+        [Test]
+        public void TC2_1_StockMainGetQuote()
+        {
+            _window.FindFirstDescendant(_cF.ByAutomationId("Ticker")).AsTextBox().Click();
+            Keyboard.Type("AMD");
+            _window.FindFirstDescendant(_cF.ByAutomationId("Go")).AsButton().Click();
+            Wait.UntilInputIsProcessed(QuickTimeout);
+            var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("TdStockListView")).AsListBox().Items;
+            Assert.That(stockData, Is.Not.Null);
+        }
+
+        [Test]
+        public void TC2_2_StockBrowseTabStockScreenerBackToMain()
+        {
+            var stockTab = _window.FindFirstDescendant(_cF.ByText("Stock Screener")).AsTabItem().Select();
+            stockTab.Click();
+            _window.FindFirstDescendant(_cF.ByAutomationId("OnToggle")).AsToggleButton().Click();
+            _window.FindFirstDescendant(_cF.ByAutomationId("MoversGrp")).AsComboBox().Select(2).Click();
+
+            var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("MoversList")).AsListBox().Items;
+            Wait.UntilInputIsProcessed(QuickTimeout);
+            Assert.That(stockData, Is.Not.Null);
+
+            var homeTab = _window.FindFirstDescendant(_cF.ByText("Home")).AsTabItem().Select();
+            homeTab.Click();
+
+            _window.FindFirstDescendant(_cF.ByAutomationId("Ticker")).AsTextBox().Click();
+            Keyboard.Type("AMD");
+            _window.FindFirstDescendant(_cF.ByAutomationId("Go")).AsButton().Click();
+            Wait.UntilInputIsProcessed(QuickTimeout);
+            var stockData2 = _window.FindFirstDescendant(_cF.ByAutomationId("TdStockListView")).AsListBox().Items;
+            Assert.That(stockData2, Is.Not.Null);
+        }
+
+        [Test]
+        public void TC2_3_StockMainPageIsNotNull()
+        {
+            var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("TdStockListView")).AsListBox().Items;
+            Assert.That(stockData, Is.Not.Null);
+        }
+
+        [Test]
+        public void TC2_4_API_TDAmeritradeReceivesResponse()
+        {
+            _window.FindFirstDescendant(_cF.ByAutomationId("Ticker")).AsTextBox().Click();
+            Keyboard.Type("MSFT");
+            _window.FindFirstDescendant(_cF.ByAutomationId("Go")).AsButton().Click();
+            Wait.UntilInputIsProcessed(QuickTimeout);
+            var stockData2 = _window.FindFirstDescendant(_cF.ByAutomationId("TdStockListView")).AsListBox().Items;
+            Assert.That(stockData2, Is.Not.Null);
+        }
+
+        [Test]
+        public void TC_2_5_PrivacyUIOpen()
+        {
+            _window.FindFirstDescendant(_cF.ByAutomationId("Abt")).AsButton().Click();
+
+            using var auto = new UIA3Automation();
+            var privacyWindow = _app.GetAllTopLevelWindows(auto);
+            
+            Assert.That(privacyWindow[0], Is.Not.Null);
         }
     }
 }
