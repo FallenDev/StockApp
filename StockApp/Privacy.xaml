@@ -1,0 +1,22 @@
+﻿<mah:MetroWindow x:Class="StockApp.Privacy"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StockApp"
+        mc:Ignorable="d"
+        Height="157" Width="249"
+        GlowBrush="#CC008A00" Background="{DynamicResource MahApps.Brushes.Window.Background}"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
+        ShowSystemMenuOnRightClick="False" WindowStyle="None" AllowsTransparency="True" Opacity="0.75">
+    <Grid Width="309" Height="178" HorizontalAlignment="Center" VerticalAlignment="Top">
+        <Grid Background="{DynamicResource MahApps.Brushes.Window.Background}" Opacity=".85" HorizontalAlignment="Center" Width="350" Height="175" VerticalAlignment="Center">
+            <TextBlock Margin="78,2,172,0" Text="Stock App" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="AliceBlue" FontSize="24" FontFamily="Palatino Linotype" FontStyle="Italic" FontWeight="Normal"/>
+            <TextBlock Margin="78,49,71,0" Text="Copyright (C) 2021 Paul R. Buck" TextWrapping="Wrap" Foreground="AliceBlue" FontSize="14" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBlock HorizontalAlignment="Left" Margin="78,72,0,84" Text="All rights reserved." TextWrapping="NoWrap" Foreground="AliceBlue" FontSize="14" d:LayoutOverrides="Height"/>
+            <TextBlock Name="AppVersion" HorizontalAlignment="Left" Margin="183,16,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Red" FontWeight="Medium" FontSize="14" Width="45" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBlock HorizontalAlignment="Left" Margin="78,97,0,0" Text="SWENG894 - Capstone Project" TextWrapping="NoWrap" VerticalAlignment="Top" Foreground="AliceBlue" FontSize="14"/>
+        </Grid>
+    </Grid>
+</mah:MetroWindow>

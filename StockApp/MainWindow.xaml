@@ -11,6 +11,11 @@
         GlowBrush="#CC008A00" Background="{DynamicResource MahApps.Brushes.Window.Background}"
         WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" 
         ShowSystemMenuOnRightClick="False" WindowStyle="ThreeDBorderWindow" Opacity="0.95" SnapsToDevicePixels="True" IconBitmapScalingMode="HighQuality">
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button Content="Privacy" Name="Abt" HorizontalAlignment="Left" Width="57" Click="PrivacyWindow"/>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid Name="MainGrid" Height="414" VerticalAlignment="Center" Margin="10,0,10,0">
             <Button Content="Go!" Name="Go" Margin="0,379,10,0" VerticalAlignment="Top" Foreground="#FFFF0707" HorizontalAlignment="Right" Width="88" Click="GoButton"/>

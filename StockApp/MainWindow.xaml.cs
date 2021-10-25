@@ -32,6 +32,7 @@ namespace StockApp
     {
         private string _symbol;
         public static bool TopOrBottom;
+        private Privacy _privacyWindow;
 
         public static ObservableCollection<TDQuoteModel> TdStocks { get; set; }
         public static ObservableCollection<TDQuoteModel> TdDetails { get; set; }
@@ -52,6 +53,19 @@ namespace StockApp
             InitializeComponent();
             TopOrBottom = true;
             ListSetup();
+        }
+
+        private void PrivacyWindow(object sender, RoutedEventArgs e)
+        {
+            if (_privacyWindow is { IsLoaded: true }) return;
+            _privacyWindow = new Privacy()
+            {
+                Owner = this
+            };
+
+            Analytics.TrackEvent("Privacy Page Viewed");
+
+            _privacyWindow.Show();
         }
 
         private void ListSetup()
