@@ -190,7 +190,7 @@ namespace StockAppTest
         }
 
         [Test]
-        public void TC_2_5_PrivacyUIOpen()
+        public void TC2_5_PrivacyUIOpen()
         {
             _window.FindFirstDescendant(_cF.ByAutomationId("Abt")).AsButton().Click();
 
@@ -198,6 +198,14 @@ namespace StockAppTest
             var privacyWindow = _app.GetAllTopLevelWindows(auto);
             
             Assert.That(privacyWindow[0], Is.Not.Null);
+        }
+
+        [Test]
+        public void TC3_1_CalculationsUI()
+        {
+            var stockTab = _window.FindFirstDescendant(_cF.ByText("Calculations")).AsTabItem().Select();
+            stockTab.Click();
+            Assert.That(stockTab.IsSelected);
         }
     }
 }

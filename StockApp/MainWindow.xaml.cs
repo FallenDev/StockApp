@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -87,6 +88,14 @@ namespace StockApp
             TdStocks?.Clear();
             TdDetails?.Clear();
             Movers?.Clear();
+        }
+
+        private static string ManageInputForCalc(string temp)
+        {
+            var ex = new Regex(@"[^0-9.]");
+            temp = ex.Replace(temp, "");
+            temp = temp.Trim();
+            return temp;
         }
 
         #region HomePage
@@ -183,6 +192,50 @@ namespace StockApp
             await controller.GetMoversAsync();
             MoversList.ItemsSource = Movers;
 
+        }
+
+        #endregion
+
+        #region CalculationsPage
+
+        private void PercentChangedBtn(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(PercentBought.Text)) return;
+            if (string.IsNullOrEmpty(PercentSold.Text)) return;
+
+            double pB = 0;
+            double pS = 0;
+
+            try
+            {
+                var temp1 = ManageInputForCalc(PercentBought.Text);
+                var temp2 = ManageInputForCalc(PercentSold.Text);
+                PercentBought.Text = temp1;
+                PercentSold.Text = temp2;
+                pB = double.Parse(temp1);
+                pS = double.Parse(temp2);
+            }
+            catch (FormatException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+
+            var pR = ((pS - pB) / pB) * 100;
+            const int maxLength = 5;
+            var convResult = pR.ToString(CultureInfo.InvariantCulture);
+            var convSubstring = convResult.Length > maxLength ? convResult.Substring(0, maxLength) : convResult;
+            PercentResult.Text = convSubstring + "%";
+        }
+
+        private void Percent_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (string.IsNullOrEmpty(PercentBought.Text)) return;
+            if (string.IsNullOrEmpty(PercentSold.Text)) return;
+
+            if (e.Key == Key.Return)
+            {
+                PercentChangedBtn(sender, e);
+            }
         }
 
         #endregion

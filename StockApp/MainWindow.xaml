@@ -139,8 +139,22 @@
                         <Button Content="Refresh" HorizontalAlignment="Left" Margin="270,9,0,0" VerticalAlignment="Top" Foreground="#FF09F32F" Click="MoversRefresh_OnClick" />
                     </Grid>
                 </TabItem>
-                <TabItem Header="Calculator" Margin="3,0,-8,0">
-                    <Grid Background="#FFE5E5E5">
+                <TabItem Header="Calculations" Margin="3,0,-8,0">
+                    <Grid Background="Black">
+                        <Grid Background="DimGray" Margin="10,10,10,10" Opacity="0.75">
+                            <GroupBox Header="Profit-Loss %" Margin="10,10,288,142" d:LayoutOverrides="VerticalAlignment">
+                                <Grid>
+                                    <TextBox Name="PercentBought" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="83" ToolTip="Enter $" MaxLength="9" Foreground="#FF09F32F" FontSize="14" FontWeight="Bold" MaxLines="1" Text="{Binding Price,StringFormat={}{0:C}}"
+                                             d:DataContext="{d:DesignData }" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="Percent_KeyDown" />
+                                    <Label Content="Bought At $" HorizontalAlignment="Left" Margin="100,11,0,0" VerticalAlignment="Top" Foreground="#FF09F32F" FontWeight="Bold" Width="83"/>
+                                    <TextBox Name="PercentSold" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="83" ToolTip="Enter $" MaxLength="9" Foreground="#FF09F32F" FontSize="14" FontWeight="Bold" MaxLines="1" Text="{Binding Price,StringFormat={}{0:C}}"
+                                             d:DataContext="{d:DesignData }" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="Percent_KeyDown" />
+                                    <Label Content="Sold At $" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Center" Foreground="#FF09F32F" FontWeight="Bold" Width="83"/>
+                                    <TextBlock Name="PercentResult" Margin="10,87,0,0" Width="83" Foreground="#FF09F32F" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" TextAlignment="Center" />
+                                    <Button Content="Determine" Margin="109,81,0,0" HorizontalAlignment="Left" Width="68" Height="34" VerticalAlignment="Top" Click="PercentChangedBtn"/>
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
                     </Grid>
                 </TabItem>
             </TabControl>
