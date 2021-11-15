@@ -213,7 +213,7 @@ namespace StockAppTest
         }
 
         [Test]
-        public void TC3_2_Calculations_Calc_PCT()
+        public void TC3_2_Calculations_Calc_PCT_Negative()
         {
             var stockTab = _window.FindFirstDescendant(_cF.ByText("Calculations")).AsTabItem().Select();
             stockTab.Click();
@@ -225,11 +225,27 @@ namespace StockAppTest
             Wait.UntilInputIsProcessed(QuickTimeout);
             var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("PercentResult"));
 
-            Assert.That(stockData, Is.Not.Null);
+            Assert.AreEqual(stockData.Name, "-13.3%");
         }
 
         [Test]
-        public void TC3_3_Calculations_Cacl_Money()
+        public void TC3_3_Calculations_Calc_PCT_Positive()
+        {
+            var stockTab = _window.FindFirstDescendant(_cF.ByText("Calculations")).AsTabItem().Select();
+            stockTab.Click();
+            _window.FindFirstDescendant(_cF.ByAutomationId("PercentBought")).AsTextBox().Click();
+            Keyboard.Type("7");
+            _window.FindFirstDescendant(_cF.ByAutomationId("PercentSold")).AsTextBox().Click();
+            Keyboard.Type("14.35");
+            _window.FindFirstDescendant(_cF.ByAutomationId("pctBtn")).AsButton().Click();
+            Wait.UntilInputIsProcessed(QuickTimeout);
+            var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("PercentResult"));
+
+            Assert.AreEqual(stockData.Name, "105%");
+        }
+
+        [Test]
+        public void TC3_4_Calculations_Cacl_Money_Positive()
         {
             var stockTab = _window.FindFirstDescendant(_cF.ByText("Calculations")).AsTabItem().Select();
             stockTab.Click();
@@ -243,7 +259,73 @@ namespace StockAppTest
             Wait.UntilInputIsProcessed(QuickTimeout);
             var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("RoiResult"));
 
-            Assert.That(stockData, Is.Not.Null);
+            Assert.AreEqual(stockData.Name, "$15000");
+        }
+
+        [Test]
+        public void TC3_5_Calculations_Cacl_Money_Negative()
+        {
+            var stockTab = _window.FindFirstDescendant(_cF.ByText("Calculations")).AsTabItem().Select();
+            stockTab.Click();
+            _window.FindFirstDescendant(_cF.ByAutomationId("RoiBought")).AsTextBox().Click();
+            Keyboard.Type("52");
+            _window.FindFirstDescendant(_cF.ByAutomationId("RoiSold")).AsTextBox().Click();
+            Keyboard.Type("13");
+            _window.FindFirstDescendant(_cF.ByAutomationId("RoiShares")).AsTextBox().Click();
+            Keyboard.Type("5000");
+            _window.FindFirstDescendant(_cF.ByAutomationId("roiBtn")).AsButton().Click();
+            Wait.UntilInputIsProcessed(QuickTimeout);
+            var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("RoiResult"));
+
+            Assert.AreEqual(stockData.Name, "$-195000");
+        }
+
+        [Test]
+        public void TC3_6_Calculations_Split_Portfolio_Times_Three()
+        {
+            var stockTab = _window.FindFirstDescendant(_cF.ByText("Calculations")).AsTabItem().Select();
+            stockTab.Click();
+            _window.FindFirstDescendant(_cF.ByAutomationId("AccountInput")).AsTextBox().Click();
+            Keyboard.Type("2500");
+            var slider = _window.FindFirstDescendant(_ => _cF.ByAutomationId("AccountSlider"));
+            slider.Patterns.RangeValue.Pattern.SetValue(3);
+
+            Wait.UntilInputIsProcessed(QuickTimeout);
+            var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("AccountResult"));
+
+            Assert.AreEqual(stockData.Name, "$833.33333");
+        }
+
+        [Test]
+        public void TC3_7_Calculations_Split_Portfolio_Times_Five()
+        {
+            var stockTab = _window.FindFirstDescendant(_cF.ByText("Calculations")).AsTabItem().Select();
+            stockTab.Click();
+            _window.FindFirstDescendant(_cF.ByAutomationId("AccountInput")).AsTextBox().Click();
+            Keyboard.Type("2500");
+            var slider = _window.FindFirstDescendant(_ => _cF.ByAutomationId("AccountSlider"));
+            slider.Patterns.RangeValue.Pattern.SetValue(5);
+            
+            Wait.UntilInputIsProcessed(QuickTimeout);
+            var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("AccountResult"));
+
+            Assert.AreEqual(stockData.Name, "$500");
+        }
+
+        [Test]
+        public void TC3_8_Calculations_Split_Portfolio_Times_Seven()
+        {
+            var stockTab = _window.FindFirstDescendant(_cF.ByText("Calculations")).AsTabItem().Select();
+            stockTab.Click();
+            _window.FindFirstDescendant(_cF.ByAutomationId("AccountInput")).AsTextBox().Click();
+            Keyboard.Type("2500");
+            var slider = _window.FindFirstDescendant(_ => _cF.ByAutomationId("AccountSlider"));
+            slider.Patterns.RangeValue.Pattern.SetValue(7);
+
+            Wait.UntilInputIsProcessed(QuickTimeout);
+            var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("AccountResult"));
+
+            Assert.AreEqual(stockData.Name, "$357.14285");
         }
     }
 }
