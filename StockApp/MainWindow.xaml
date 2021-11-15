@@ -151,7 +151,7 @@
                                              d:DataContext="{d:DesignData }" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="Percent_KeyDown" />
                                     <Label Content="Sold At $" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Center" Foreground="#FF09F32F" FontWeight="Bold" Width="83"/>
                                     <TextBlock Name="PercentResult" Margin="10,87,0,0" Width="83" Foreground="#FF09F32F" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" TextAlignment="Center" />
-                                    <Button Content="Determine" Margin="109,81,0,0" HorizontalAlignment="Left" Width="68" Height="34" VerticalAlignment="Top" Click="PercentChangedBtn"/>
+                                    <Button Content="Determine" Name="pctBtn" Margin="109,81,0,0" HorizontalAlignment="Left" Width="68" Height="34" VerticalAlignment="Top" Click="PercentChangedBtn"/>
                                 </Grid>
                             </GroupBox>
                             <GroupBox Header="Profit/Loss Realized $ " Margin="251,10,11,92" d:LayoutOverrides="VerticalAlignment">
@@ -162,11 +162,11 @@
                                     <TextBox KeyDown="Roi_KeyDown" Name="RoiSold" HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="Wrap" Width="83" ToolTip="Enter $" MaxLength="9" Foreground="#FF09F32F" FontSize="14" FontWeight="Bold" MaxLines="1" Text="{Binding Price, StringFormat={}{0:C}}"
                                              d:DataContext="{d:DesignData }" Height="29" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                                     <Label Content="Sold At $" HorizontalAlignment="Left" Margin="98,50,0,0" VerticalAlignment="Top" Foreground="#FF09F32F" FontWeight="Bold" Width="95"/>
-                                    <TextBox KeyDown="Roi_KeyDown" Name="RoiShares" HorizontalAlignment="Left" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="83" ToolTip="Enter $" MaxLength="9" Foreground="#FF09F32F" FontSize="14" FontWeight="Bold" MaxLines="1" Text="{Binding Price, StringFormat={}{0:C}}"
+                                    <TextBox KeyDown="Roi_KeyDown" Name="RoiShares" HorizontalAlignment="Left" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="83" ToolTip="Enter Shares" MaxLength="9" Foreground="#FF09F32F" FontSize="14" FontWeight="Bold" MaxLines="1" Text="{Binding Price, StringFormat={}{0:C}}"
                                              d:DataContext="{d:DesignData }" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                                     <Label Content="Shares Purchased" HorizontalAlignment="Left" Margin="98,89,0,0" VerticalAlignment="Top" Foreground="#FF09F32F" FontWeight="Bold" Width="107"/>
                                     <TextBlock Name="RoiResult" Margin="10,128,0,0" Width="83" Foreground="#FF09F32F" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" TextAlignment="Center"/>
-                                    <Button Click="RoiCalcBtn" Content="Determine" Margin="125,122,0,0" HorizontalAlignment="Left" Width="68" Height="34" VerticalAlignment="Top"/>
+                                    <Button Click="RoiCalcBtn" Name="roiBtn" Content="Determine" Margin="125,122,0,0" HorizontalAlignment="Left" Width="68" Height="34" VerticalAlignment="Top"/>
                                 </Grid>
                             </GroupBox>
                         </Grid>

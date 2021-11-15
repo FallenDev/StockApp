@@ -7,16 +7,20 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Automation;
 using System.Windows.Media.Imaging;
+
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3;
+
 using MahApps.Metro.Controls;
+
 using NUnit.Framework;
 
 using StockApp;
+
 using AutomationElement = FlaUI.Core.AutomationElements.AutomationElement;
 
 namespace StockAppTest
@@ -56,7 +60,7 @@ namespace StockAppTest
 
         [Test]
         public void TC1_2_MainWindowUI()
-        {            
+        {
             Assert.That(_window, Is.Not.Null);
         }
 
@@ -196,7 +200,7 @@ namespace StockAppTest
 
             using var auto = new UIA3Automation();
             var privacyWindow = _app.GetAllTopLevelWindows(auto);
-            
+
             Assert.That(privacyWindow[0], Is.Not.Null);
         }
 
@@ -206,6 +210,40 @@ namespace StockAppTest
             var stockTab = _window.FindFirstDescendant(_cF.ByText("Calculations")).AsTabItem().Select();
             stockTab.Click();
             Assert.That(stockTab.IsSelected);
+        }
+
+        [Test]
+        public void TC3_2_Calculations_Calc_PCT()
+        {
+            var stockTab = _window.FindFirstDescendant(_cF.ByText("Calculations")).AsTabItem().Select();
+            stockTab.Click();
+            _window.FindFirstDescendant(_cF.ByAutomationId("PercentBought")).AsTextBox().Click();
+            Keyboard.Type("15");
+            _window.FindFirstDescendant(_cF.ByAutomationId("PercentSold")).AsTextBox().Click();
+            Keyboard.Type("13");
+            _window.FindFirstDescendant(_cF.ByAutomationId("pctBtn")).AsButton().Click();
+            Wait.UntilInputIsProcessed(QuickTimeout);
+            var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("PercentResult"));
+
+            Assert.That(stockData, Is.Not.Null);
+        }
+
+        [Test]
+        public void TC3_3_Calculations_Cacl_Money()
+        {
+            var stockTab = _window.FindFirstDescendant(_cF.ByText("Calculations")).AsTabItem().Select();
+            stockTab.Click();
+            _window.FindFirstDescendant(_cF.ByAutomationId("RoiBought")).AsTextBox().Click();
+            Keyboard.Type("25");
+            _window.FindFirstDescendant(_cF.ByAutomationId("RoiSold")).AsTextBox().Click();
+            Keyboard.Type("28");
+            _window.FindFirstDescendant(_cF.ByAutomationId("RoiShares")).AsTextBox().Click();
+            Keyboard.Type("5000");
+            _window.FindFirstDescendant(_cF.ByAutomationId("roiBtn")).AsButton().Click();
+            Wait.UntilInputIsProcessed(QuickTimeout);
+            var stockData = _window.FindFirstDescendant(_cF.ByAutomationId("RoiResult"));
+
+            Assert.That(stockData, Is.Not.Null);
         }
     }
 }
