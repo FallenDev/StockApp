@@ -238,6 +238,39 @@ namespace StockApp
             }
         }
 
+        private void RoiCalcBtn(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(RoiBought.Text) || string.IsNullOrEmpty(RoiSold.Text) || string.IsNullOrEmpty(RoiShares.Text))
+                return;
+            double num1 = 0.0;
+            double num2 = 0.0;
+            double num3 = 0.0;
+            try
+            {
+                string s1 = MainWindow.ManageInputForCalc(RoiBought.Text);
+                string s2 = MainWindow.ManageInputForCalc(RoiSold.Text);
+                string s3 = MainWindow.ManageInputForCalc(RoiShares.Text);
+                RoiBought.Text = s1;
+                RoiSold.Text = s2;
+                RoiShares.Text = s3;
+                num1 = double.Parse(s1);
+                num2 = double.Parse(s2);
+                num3 = double.Parse(s3);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            string str = (num2 * num3 - num1 * num3).ToString((IFormatProvider)CultureInfo.InvariantCulture);
+            RoiResult.Text = "$" + (str.Length > 9 ? str.Substring(0, 9) : str);
+        }
+
+        private void Roi_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (string.IsNullOrEmpty(RoiBought.Text) || string.IsNullOrEmpty(RoiSold.Text) || string.IsNullOrEmpty(RoiShares.Text) || e.Key != Key.Enter) return;
+            RoiCalcBtn(sender, (RoutedEventArgs)e);
+        }
+
         #endregion
     }
 }
