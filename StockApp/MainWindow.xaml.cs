@@ -242,14 +242,14 @@ namespace StockApp
         {
             if (string.IsNullOrEmpty(RoiBought.Text) || string.IsNullOrEmpty(RoiSold.Text) || string.IsNullOrEmpty(RoiShares.Text))
                 return;
-            double num1 = 0.0;
-            double num2 = 0.0;
-            double num3 = 0.0;
+            var num1 = 0.0;
+            var num2 = 0.0;
+            var num3 = 0.0;
             try
             {
-                string s1 = MainWindow.ManageInputForCalc(RoiBought.Text);
-                string s2 = MainWindow.ManageInputForCalc(RoiSold.Text);
-                string s3 = MainWindow.ManageInputForCalc(RoiShares.Text);
+                var s1 = MainWindow.ManageInputForCalc(RoiBought.Text);
+                var s2 = MainWindow.ManageInputForCalc(RoiSold.Text);
+                var s3 = MainWindow.ManageInputForCalc(RoiShares.Text);
                 RoiBought.Text = s1;
                 RoiSold.Text = s2;
                 RoiShares.Text = s3;
@@ -261,8 +261,33 @@ namespace StockApp
             {
                 Console.WriteLine(ex.Message);
             }
-            string str = (num2 * num3 - num1 * num3).ToString((IFormatProvider)CultureInfo.InvariantCulture);
-            RoiResult.Text = "$" + (str.Length > 9 ? str.Substring(0, 9) : str);
+            var str = (num2 * num3 - num1 * num3).ToString(CultureInfo.InvariantCulture);
+            RoiResult.Text = "$" + (str.Length > 9 ? str[..9] : str);
+        }
+
+        private void AccountSplitSlider(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(AccountInput.Text)) return;
+
+            double account = 0;
+            double slider = AccountSlider.Value;
+
+            try
+            {
+                var temp = ManageInputForCalc(AccountInput.Text);
+                AccountInput.Text = temp;
+                account = double.Parse(temp);
+            }
+            catch (FormatException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+
+            var aR = account / slider;
+            const int maxLength = 9;
+            var convResult = aR.ToString(CultureInfo.InvariantCulture);
+            var convSubstring = convResult.Length > maxLength ? convResult.Substring(0, maxLength) : convResult;
+            AccountResult.Text = "$" + convSubstring;
         }
 
         private void Roi_KeyDown(object sender, KeyEventArgs e)

@@ -169,6 +169,15 @@
                                     <Button Click="RoiCalcBtn" Name="roiBtn" Content="Determine" Margin="125,122,0,0" HorizontalAlignment="Left" Width="68" Height="34" VerticalAlignment="Top"/>
                                 </Grid>
                             </GroupBox>
+                            <GroupBox Header="Portfolio Split" Margin="10,176,256,10">
+                                <Grid>
+                                    <TextBox Name="AccountInput" HorizontalAlignment="Left" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" ToolTip="Enter $" MaxLength="9" Foreground="#FF09F32F" FontSize="14" FontWeight="Bold" MaxLines="1" Text="{Binding Price,StringFormat={}{0:C}}"
+                                             d:DataContext="{d:DesignData }" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                    <Label Content="Amount Per Trade" HorizontalAlignment="Left" Margin="110,-5,0,0" VerticalAlignment="Top" Foreground="#FF09F32F" FontWeight="Bold" Width="115"/>
+                                    <TextBlock Name="AccountResult" Margin="117,26,0,0" Width="100" Foreground="#FF09F32F" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" TextAlignment="Center" d:LayoutOverrides="Height" />
+                                    <Slider Name="AccountSlider" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="199" ValueChanged="AccountSplitSlider" TickPlacement="BottomRight" IsSnapToTickEnabled="True" SmallChange="1" Value="1" Maximum="10" Minimum="1" AutoToolTipPlacement="BottomRight"/>
+                                </Grid>
+                            </GroupBox>
                         </Grid>
                     </Grid>
                 </TabItem>
