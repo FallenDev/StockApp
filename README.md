@@ -4,9 +4,9 @@ is an app focused on giving traders the ability to see their potential gains/los
 # Links of Reference
 .NET 6 Framework Download: (Needed to run the Executable)
 
--- x64: https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-6.0.100-preview.7-windows-x64-installer
+-- x64: https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-6.0.100-windows-x64-installer
 
--- x86: https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-6.0.100-preview.7-windows-x86-installer
+-- x86: https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-6.0.100-windows-x86-installer
 
 Compiled Program
-https://www.thebucknetwork.com
+https://www.thebucknetwork.com/Trade
